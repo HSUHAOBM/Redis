@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stream Page EventSource </title>
+</head>
+<body>
+    <h1>Real-time Notification Stream</h1>
+    <ul id="messages"></ul>
+    <script>
+        // EventSource
+        var source = new EventSource("/stream");
+        source.onmessage = function(event) {
+            var message = JSON.parse(event.data);
+            var li = document.createElement("li");
+            var text = document.createTextNode(message.text);
+            li.appendChild(text);
+            document.getElementById("messages").appendChild(li);
+        };
+    </script>
+</body>
+</html>
